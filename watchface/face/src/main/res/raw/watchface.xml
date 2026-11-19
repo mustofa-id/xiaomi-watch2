@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Black — minimal analog watch face.
+
+    Pure black scene, three white vector hands, a moon-phase icon drawn from
+    the current phase, and three numeric readouts (time, stacked day/month,
+    battery). No weather, no third-party providers.
+
+    Coordinate space is 450x450; the platform scales it to the device.
+-->
+<WatchFace width="450" height="450">
+    <Metadata key="CLOCK_TYPE" value="ANALOG" />
+    <Metadata key="PREVIEW_TIME" value="10:08:32" />
+
+    <Scene backgroundColor="#ff000000">
+
+        <!--
+            Left-middle: moon phase icon. Declared before the hands so the
+            hands pass over it. MOON_PHASE_TYPE selects one of eight phase
+            images; the plain ring is the fallback.
+        -->
+        <Condition>
+            <Expressions>
+                <Expression name="moonNew">[MOON_PHASE_TYPE] == 0</Expression>
+                <Expression name="moonWaxingCrescent">[MOON_PHASE_TYPE] == 1</Expression>
+                <Expression name="moonFirstQuarter">[MOON_PHASE_TYPE] == 2</Expression>
+                <Expression name="moonWaxingGibbous">[MOON_PHASE_TYPE] == 3</Expression>
+                <Expression name="moonFull">[MOON_PHASE_TYPE] == 4</Expression>
+                <Expression name="moonWaningGibbous">[MOON_PHASE_TYPE] == 5</Expression>
+                <Expression name="moonLastQuarter">[MOON_PHASE_TYPE] == 6</Expression>
+                <Expression name="moonWaningCrescent">[MOON_PHASE_TYPE] == 7</Expression>
+            </Expressions>
+
+            <Compare expression="moonNew">
+                <PartImage x="74" y="207" width="36" height="36">
+                    <Variant mode="AMBIENT" target="alpha" value="160" />
+                    <Image resource="moon_new" />
+                </PartImage>
+            </Compare>
+
+            <Compare expression="moonWaxingCrescent">
+                <PartImage x="74" y="207" width="36" height="36">
+                    <Variant mode="AMBIENT" target="alpha" value="160" />
+                    <Image resource="moon_waxing_crescent" />
+                </PartImage>
+            </Compare>
+
+            <Compare expression="moonFirstQuarter">
+                <PartImage x="74" y="207" width="36" height="36">
+                    <Variant mode="AMBIENT" target="alpha" value="160" />
+                    <Image resource="moon_first_quarter" />
+                </PartImage>
+            </Compare>
+
+            <Compare expression="moonWaxingGibbous">
+                <PartImage x="74" y="207" width="36" height="36">
+                    <Variant mode="AMBIENT" target="alpha" value="160" />
+                    <Image resource="moon_waxing_gibbous" />
+                </PartImage>
+            </Compare>
+
+            <Compare expression="moonFull">
+                <PartImage x="74" y="207" width="36" height="36">
+                    <Variant mode="AMBIENT" target="alpha" value="160" />
+                    <Image resource="moon_full" />
+                </PartImage>
+            </Compare>
+
+            <Compare expression="moonWaningGibbous">
+                <PartImage x="74" y="207" width="36" height="36">
+                    <Variant mode="AMBIENT" target="alpha" value="160" />
+                    <Image resource="moon_waning_gibbous" />
+                </PartImage>
+            </Compare>
+
+            <Compare expression="moonLastQuarter">
+                <PartImage x="74" y="207" width="36" height="36">
+                    <Variant mode="AMBIENT" target="alpha" value="160" />
+                    <Image resource="moon_last_quarter" />
+                </PartImage>
+            </Compare>
+
+            <Compare expression="moonWaningCrescent">
+                <PartImage x="74" y="207" width="36" height="36">
+                    <Variant mode="AMBIENT" target="alpha" value="160" />
+                    <Image resource="moon_waning_crescent" />
+                </PartImage>
+            </Compare>
+
+            <Default>
+                <PartImage x="74" y="207" width="36" height="36">
+                    <Variant mode="AMBIENT" target="alpha" value="160" />
+                    <Image resource="moon_new" />
+                </PartImage>
+            </Default>
+        </Condition>
+
+
+        <!-- Hands: hour 100, minute 144, second 164 units, no counterpoise. -->
+        <AnalogClock x="0" y="0" width="450" height="450">
+            <Variant mode="AMBIENT" target="alpha" value="200" />
+
+            <HourHand resource="hand_hour"
+                x="219" y="120" width="12" height="110"
+                pivotX="0.5" pivotY="0.9545" />
+
+            <MinuteHand resource="hand_minute"
+                x="219" y="77" width="12" height="152"
+                pivotX="0.5" pivotY="0.9737" />
+
+            <!-- 204 = 80% opaque, i.e. 20% transparent. -->
+            <SecondHand resource="hand_second" alpha="204"
+                x="221" y="59" width="8" height="168"
+                pivotX="0.5" pivotY="0.9881">
+                <!-- Hidden while the watch is in ambient mode. -->
+                <Variant mode="AMBIENT" target="alpha" value="0" />
+            </SecondHand>
+        </AnalogClock>
+
+        <!-- Top-centre: time, following the watch's 12/24h setting. -->
+        <DigitalClock x="155" y="44" width="140" height="46">
+            <TimeText x="0" y="0" width="140" height="46"
+                format="hh:mm" hourFormat="SYNC_TO_DEVICE" align="CENTER">
+                <Variant mode="AMBIENT" target="alpha" value="160" />
+                <Font family="cascadia_code" size="30" color="#ffffffff" />
+            </TimeText>
+        </DigitalClock>
+
+        <!-- Bottom-centre: battery percentage. -->
+        <PartText x="155" y="380" width="140" height="40">
+            <Variant mode="AMBIENT" target="alpha" value="160" />
+            <Text align="CENTER">
+                <Font family="cascadia_code" size="24" color="#ffffffff">
+                    <Template>%d%%<Parameter expression="[BATTERY_PERCENT]" /></Template>
+                </Font>
+            </Text>
+        </PartText>
+
+        <!--
+            Dedication line, just above the battery. Deliberately in the
+            system font, smaller than the battery text.
+        -->
+        <PartText x="80" y="360" width="290" height="22">
+            <Variant mode="AMBIENT" target="alpha" value="160" />
+            <Text align="CENTER">
+                <Font family="SYNC_TO_DEVICE" size="18" color="#ffffffff">
+                    <![CDATA[Khawlah Zahra Fasihah]]>
+                </Font>
+            </Text>
+        </PartText>
+
+        <!-- Right-middle: day over month, one thin rule between them. -->
+        <PartText x="337" y="194" width="71" height="32">
+            <Variant mode="AMBIENT" target="alpha" value="160" />
+            <Text align="CENTER">
+                <Font family="cascadia_code" size="26" color="#ffe8ffec">
+                    <Template>%02d<Parameter expression="[DAY]" /></Template>
+                </Font>
+            </Text>
+        </PartText>
+
+        <PartImage x="357" y="224" width="31" height="2">
+            <Variant mode="AMBIENT" target="alpha" value="160" />
+            <Image resource="date_separator" />
+        </PartImage>
+
+        <PartText x="337" y="224" width="71" height="32">
+            <Variant mode="AMBIENT" target="alpha" value="160" />
+            <Text align="CENTER">
+                <Font family="cascadia_code" size="26" color="#ffe8ffec">
+                    <Template>%02d<Parameter expression="[MONTH]" /></Template>
+                </Font>
+            </Text>
+        </PartText>
+
+
+    </Scene>
+</WatchFace>

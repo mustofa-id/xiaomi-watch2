@@ -1,0 +1,16 @@
+.gradle/
+build/
+face/build/
+local.properties
+keystore.properties
+*.jks
+*.keystore
+__pycache__/
+*.py[cod]
+*.iml
+.idea/
+screenshots/
+dist/
+*.apk
+*.aab
+*.idsig

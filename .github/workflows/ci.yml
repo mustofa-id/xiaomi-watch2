@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  watchface:
+    name: Validate and build watch face
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: watchface
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install Android SDK components
+        run: sdkmanager "platforms;android-36" "build-tools;37.0.0"
+
+      - name: Set up Gradle cache
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Validate Watch Face Format
+        run: ./tools/validate.sh
+
+      - name: Build debug and unsigned release APKs
+        run: ./gradlew --console=plain :face:assembleDebug :face:assembleRelease
+
+  scripts:
+    name: Check utility scripts
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Check shell syntax
+        run: bash -n debloat/apply.sh debloat/rollback.sh watchface/tools/*.sh
+
+      - name: Check Python syntax
+        run: python3 -m py_compile watchface/tools/make-moon-icons.py

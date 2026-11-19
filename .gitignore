@@ -1,0 +1,30 @@
+# Operating systems and editors
+.DS_Store
+.idea/
+.vscode/
+*.iml
+*~
+
+# Android and Gradle
+**/.gradle/
+**/build/
+**/local.properties
+
+# Python
+**/__pycache__/
+*.py[cod]
+
+# Signing material and local environment
+**/keystore.properties
+*.jks
+*.keystore
+.env
+.env.*
+!.env.example
+
+# Local captures and distributable binaries
+watchface/screenshots/
+watchface/dist/
+*.apk
+*.aab
+*.idsig

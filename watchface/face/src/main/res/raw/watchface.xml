@@ -33,63 +33,63 @@
 
             <Compare expression="moonNew">
                 <PartImage x="74" y="207" width="36" height="36">
-                    <Variant mode="AMBIENT" target="alpha" value="160" />
+                    <Variant mode="AMBIENT" target="alpha" value="0" />
                     <Image resource="moon_new" />
                 </PartImage>
             </Compare>
 
             <Compare expression="moonWaxingCrescent">
                 <PartImage x="74" y="207" width="36" height="36">
-                    <Variant mode="AMBIENT" target="alpha" value="160" />
+                    <Variant mode="AMBIENT" target="alpha" value="0" />
                     <Image resource="moon_waxing_crescent" />
                 </PartImage>
             </Compare>
 
             <Compare expression="moonFirstQuarter">
                 <PartImage x="74" y="207" width="36" height="36">
-                    <Variant mode="AMBIENT" target="alpha" value="160" />
+                    <Variant mode="AMBIENT" target="alpha" value="0" />
                     <Image resource="moon_first_quarter" />
                 </PartImage>
             </Compare>
 
             <Compare expression="moonWaxingGibbous">
                 <PartImage x="74" y="207" width="36" height="36">
-                    <Variant mode="AMBIENT" target="alpha" value="160" />
+                    <Variant mode="AMBIENT" target="alpha" value="0" />
                     <Image resource="moon_waxing_gibbous" />
                 </PartImage>
             </Compare>
 
             <Compare expression="moonFull">
                 <PartImage x="74" y="207" width="36" height="36">
-                    <Variant mode="AMBIENT" target="alpha" value="160" />
+                    <Variant mode="AMBIENT" target="alpha" value="0" />
                     <Image resource="moon_full" />
                 </PartImage>
             </Compare>
 
             <Compare expression="moonWaningGibbous">
                 <PartImage x="74" y="207" width="36" height="36">
-                    <Variant mode="AMBIENT" target="alpha" value="160" />
+                    <Variant mode="AMBIENT" target="alpha" value="0" />
                     <Image resource="moon_waning_gibbous" />
                 </PartImage>
             </Compare>
 
             <Compare expression="moonLastQuarter">
                 <PartImage x="74" y="207" width="36" height="36">
-                    <Variant mode="AMBIENT" target="alpha" value="160" />
+                    <Variant mode="AMBIENT" target="alpha" value="0" />
                     <Image resource="moon_last_quarter" />
                 </PartImage>
             </Compare>
 
             <Compare expression="moonWaningCrescent">
                 <PartImage x="74" y="207" width="36" height="36">
-                    <Variant mode="AMBIENT" target="alpha" value="160" />
+                    <Variant mode="AMBIENT" target="alpha" value="0" />
                     <Image resource="moon_waning_crescent" />
                 </PartImage>
             </Compare>
 
             <Default>
                 <PartImage x="74" y="207" width="36" height="36">
-                    <Variant mode="AMBIENT" target="alpha" value="160" />
+                    <Variant mode="AMBIENT" target="alpha" value="0" />
                     <Image resource="moon_new" />
                 </PartImage>
             </Default>
@@ -118,7 +118,7 @@
         </AnalogClock>
 
         <!-- Top-centre: time, following the watch's 12/24h setting. -->
-        <DigitalClock x="155" y="44" width="140" height="46">
+        <DigitalClock x="155" y="50" width="140" height="46">
             <TimeText x="0" y="0" width="140" height="46"
                 format="hh:mm" hourFormat="SYNC_TO_DEVICE" align="CENTER">
                 <Variant mode="AMBIENT" target="alpha" value="160" />
@@ -141,7 +141,7 @@
             system font, smaller than the battery text.
         -->
         <PartText x="80" y="360" width="290" height="22">
-            <Variant mode="AMBIENT" target="alpha" value="160" />
+            <Variant mode="AMBIENT" target="alpha" value="0" />
             <Text align="CENTER">
                 <Font family="SYNC_TO_DEVICE" size="18" color="#ffffffff">
                     <![CDATA[Khawlah Zahra Fasihah]]>
@@ -151,7 +151,7 @@
 
         <!-- Right-middle: day over month, one thin rule between them. -->
         <PartText x="337" y="194" width="71" height="32">
-            <Variant mode="AMBIENT" target="alpha" value="160" />
+            <Variant mode="AMBIENT" target="alpha" value="0" />
             <Text align="CENTER">
                 <Font family="cascadia_code" size="26" color="#ffe8ffec">
                     <Template>%02d<Parameter expression="[DAY]" /></Template>
@@ -160,12 +160,12 @@
         </PartText>
 
         <PartImage x="357" y="224" width="31" height="2">
-            <Variant mode="AMBIENT" target="alpha" value="160" />
+            <Variant mode="AMBIENT" target="alpha" value="0" />
             <Image resource="date_separator" />
         </PartImage>
 
         <PartText x="337" y="224" width="71" height="32">
-            <Variant mode="AMBIENT" target="alpha" value="160" />
+            <Variant mode="AMBIENT" target="alpha" value="0" />
             <Text align="CENTER">
                 <Font family="cascadia_code" size="26" color="#ffe8ffec">
                     <Template>%02d<Parameter expression="[MONTH]" /></Template>

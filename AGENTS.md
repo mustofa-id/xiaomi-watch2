@@ -5,7 +5,7 @@ Guidance for coding agents and contributors working in this repository.
 ## Repository layout
 
 - `watchface/`: Android resource-only Watch Face Format project.
-- `debloat/`: reversible ADB package-management scripts.
+- `debloat/`: reversible ADB package-management scripts and Wi-Fi control repair.
 - `.github/workflows/ci.yml`: public CI checks.
 
 ## General rules
@@ -61,10 +61,16 @@ Guidance for coding agents and contributors working in this repository.
   behavior in `apply.sh`.
 - Clearly document changes affecting accessibility, emergency alerts, input,
   payments, connectivity, or app installation.
-- Syntax-check scripts after edits:
+- Keep `fix-wifi.sh` standalone: restore connectivity mediation without changing
+  radio preferences, debugging settings, networks, or packages. Print rollback
+  commands before writes and never assume an ADB disconnect proves success.
+- Syntax-check every script and run the mocked Wi-Fi tests after edits:
 
   ```bash
-  bash -n debloat/apply.sh debloat/rollback.sh
+  for script in debloat/*.sh; do
+    bash -n "$script"
+  done
+  python3 -B -m unittest discover -s debloat/tests -v
   ```
 
 ## Public release checks

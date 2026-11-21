@@ -11,7 +11,7 @@ Utilities and a custom Watch Face Format project for the Xiaomi Watch 2.
 | Directory | Description |
 |---|---|
 | [`watchface/`](watchface/) | **Black**, a minimal WFF v1 analog watch face with a pure-black background, white primary elements, and pale-mint accents. |
-| [`debloat/`](debloat/) | Reversible ADB scripts for disabling optional packages on a Xiaomi Watch 2 without root. |
+| [`debloat/`](debloat/) | Reversible ADB debloating and a standalone Wi-Fi control repair for a Xiaomi Watch 2, without root. |
 
 The projects were tested on a Xiaomi Watch 2 (`axolotlaxie`) running Wear OS 5
 / Android 14. Firmware and package names can differ by region and update.
@@ -53,7 +53,9 @@ cd debloat
 ```
 
 Every scripted change has a corresponding rollback command. Read
-[`debloat/README.md`](debloat/README.md) before running either script.
+[`debloat/README.md`](debloat/README.md) before running the scripts. For Wi-Fi
+that stays active despite being switched off, see the separate
+[`fix-wifi.sh`](debloat/fix-wifi.sh) repair utility; it does not run the debloat list.
 
 ## Releases
 

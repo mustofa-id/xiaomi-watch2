@@ -49,7 +49,13 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Check shell syntax
-        run: bash -n debloat/apply.sh debloat/rollback.sh watchface/tools/*.sh
+        run: |
+          for script in debloat/*.sh watchface/tools/*.sh; do
+            bash -n "$script"
+          done
+
+      - name: Test Wi-Fi repair without a device
+        run: python3 -B -m unittest discover -s debloat/tests -v
 
       - name: Check Python syntax
         run: python3 -m py_compile watchface/tools/make-moon-icons.py

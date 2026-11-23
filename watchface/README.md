@@ -143,8 +143,12 @@ image and normalizes it to 466×466 sRGB PNG.
 | Moon and date numbers | `#FFE8FFEC` |
 | Date rule | `#FFFFFFFF` |
 | Time, battery, and dedication | `#FFFFFFFF` |
+| Ambient hands | `#FF66FF99` at alpha 150 |
+| Ambient time and battery | `#FF66FF99` at alpha 150 |
 
-Ambient mode dims the primary elements and hides the seconds hand.
+Ambient mode swaps the primary elements for dim green copies to reduce AMOLED
+emission, and hides the seconds hand, moon, date, rule, and dedication. Green is
+the most efficient OLED emitter, while white lights all three subpixels.
 
 ## Troubleshooting
 

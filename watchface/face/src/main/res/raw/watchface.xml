@@ -4,7 +4,8 @@
 
     Pure black scene, three white vector hands, a moon-phase icon drawn from
     the current phase, and three numeric readouts (time, stacked day/month,
-    battery). No weather, no third-party providers.
+    battery). Ambient mode keeps only dim green hands, time, and battery to
+    minimize AMOLED emission. No weather, no third-party providers.
 
     Coordinate space is 450x450; the platform scales it to the device.
 -->
@@ -96,9 +97,13 @@
         </Condition>
 
 
-        <!-- Hands: hour 100, minute 144, second 164 units, no counterpoise. -->
+        <!--
+            Hands: hour 100, minute 144, second 164 units, no counterpoise.
+            The interactive clock is white; ambient uses a green-only copy
+            because green emitters are the most efficient on AMOLED.
+        -->
         <AnalogClock x="0" y="0" width="450" height="450">
-            <Variant mode="AMBIENT" target="alpha" value="200" />
+            <Variant mode="AMBIENT" target="alpha" value="0" />
 
             <HourHand resource="hand_hour"
                 x="219" y="120" width="12" height="110"
@@ -117,20 +122,50 @@
             </SecondHand>
         </AnalogClock>
 
+        <AnalogClock x="0" y="0" width="450" height="450" alpha="0"
+            tintColor="#ff66ff99">
+            <Variant mode="AMBIENT" target="alpha" value="150" />
+
+            <HourHand resource="hand_hour"
+                x="219" y="120" width="12" height="110"
+                pivotX="0.5" pivotY="0.9545" />
+
+            <MinuteHand resource="hand_minute"
+                x="219" y="77" width="12" height="152"
+                pivotX="0.5" pivotY="0.9737" />
+        </AnalogClock>
+
         <!-- Top-centre: time, following the watch's 12/24h setting. -->
         <DigitalClock x="155" y="50" width="140" height="46">
             <TimeText x="0" y="0" width="140" height="46"
                 format="hh:mm" hourFormat="SYNC_TO_DEVICE" align="CENTER">
-                <Variant mode="AMBIENT" target="alpha" value="160" />
+                <Variant mode="AMBIENT" target="alpha" value="0" />
                 <Font family="cascadia_code" size="30" color="#ffffffff" />
+            </TimeText>
+        </DigitalClock>
+
+        <DigitalClock x="155" y="50" width="140" height="46">
+            <TimeText x="0" y="0" width="140" height="46" alpha="0"
+                format="hh:mm" hourFormat="SYNC_TO_DEVICE" align="CENTER">
+                <Variant mode="AMBIENT" target="alpha" value="150" />
+                <Font family="cascadia_code" size="30" color="#ff66ff99" />
             </TimeText>
         </DigitalClock>
 
         <!-- Bottom-centre: battery percentage. -->
         <PartText x="155" y="380" width="140" height="40">
-            <Variant mode="AMBIENT" target="alpha" value="160" />
+            <Variant mode="AMBIENT" target="alpha" value="0" />
             <Text align="CENTER">
                 <Font family="cascadia_code" size="24" color="#ffffffff">
+                    <Template>%d%%<Parameter expression="[BATTERY_PERCENT]" /></Template>
+                </Font>
+            </Text>
+        </PartText>
+
+        <PartText x="155" y="380" width="140" height="40" alpha="0">
+            <Variant mode="AMBIENT" target="alpha" value="150" />
+            <Text align="CENTER">
+                <Font family="cascadia_code" size="24" color="#ff66ff99">
                     <Template>%d%%<Parameter expression="[BATTERY_PERCENT]" /></Template>
                 </Font>
             </Text>
